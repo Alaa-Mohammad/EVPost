@@ -8,15 +8,14 @@ from django.contrib.auth.decorators import login_required
 def get_posts(request, user_pk=None):
     if user_pk != None:
         user = get_object_or_404(User, pk=user_pk)
-        posts = Post.objects.select_related('user').filter(user= user, is_available=True)
+        data = Post.objects.select_related('user').filter(user= user, is_available=True)
         
     else:
-        posts = Post.objects.select_related('user').filter(is_available=True)
+        data = Post.objects.select_related('user').filter(is_available=True)
         
-    paginator = Paginator(posts,6)
-    page = request.GET.get('page')
-    page_number = paginator.get_page(page)
-    post_count = posts.count()
+    paginator = Paginator(data,6)
+    page_number = request.GET.get('page')
+    post_count = data.count()
     
     try:
         paged_posts = paginator.get_page(page_number)  

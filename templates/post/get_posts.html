@@ -30,7 +30,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 d-flex mt-3">
   {%for post in posts%}
   <div class="card">
-    <a href='{{post.get_absolute_url}}' style='text-decoration: none !important;'>
+    <a href='{{post.get_absolute_url}}' style='text-decoration: none !important; color:black;'>
 
     
     {%get_images post as postgallerys%}
@@ -53,16 +53,23 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-  </a>
   
       <div class="card-body">
-        <h5 class="card-title">{{post.title}}</h5>
-        <p class="card-text">{{post.content}}</p>
+        <h5 class="card-title"><em>{{post.title}}</em></h5>
+        <p class="card-text">
+          {%if postgallerys|length < 1%}
+          {{post.content}}
+          {%else%}
+          {{post.content|truncatewords:30}}
+          {%endif%}
+        </p>
       </div>
-      <div class="card-footer">
+    </a>
+      <div class="card-footer " >
         <small class="text-muted">{{post.created_at}}</small><br>
         <small class="text-muted">{{post.user.username}}</small>
       </div>
+   
   </div>
     
   {%endfor%}
