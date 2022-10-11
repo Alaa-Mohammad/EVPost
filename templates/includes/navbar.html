@@ -1,0 +1,42 @@
+{% load static %}
+{% load poll_extras %}
+
+<nav class="navbar navbar-expand-md navbar-dark  bg-dark " >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/" style='font-size:23px;font-family: "Times New Roman", Times, serif'>EVPost</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{%url 'all_posts' %}" 
+            {%if '/' == request.path%} style='color:green'{%endif%}>All posts</a>
+          </li>
+          {%if  request.user.is_authenticated%}
+
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'my_posts' request.user.id%}"
+            {%if request.user.id|to_str in request.path %} style='color:green' {%endif%} >Your Posts</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'create_post' %}" 
+           {%if 'create_post' in request.path %} style='color:green' {%endif%} >create post</a>
+          </li>
+          {%endif%}
+        </ul>
+        <div class="d-flex">
+          {%if  request.user.is_authenticated%}
+          <h6 style='margin-right:10px; margin-top:10px ;color:white'><em>welcome {{request.user.username}}</em></h6>
+          <a href={%url 'logout' %}><button class="btn btn-outline-success" >Logout</button></a>
+
+          {%else%}
+          <a href={%url 'login' %}> <button class="btn btn-outline-success"  style='margin-right:10px;' >Login</button></a>
+            <a href={%url 'register' %}><button class="btn btn-outline-success" >Register</button></a>
+
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,77 @@
+{%extends 'base.html'%}
+{%load static%}
+{% load poll_extras %}
+
+
+{%block extraCSS%}
+<style>
+  .deleted{
+    opacity:0.4;
+  }
+  .add_color{
+    color:green
+  }
+</style>
+{%endblock%}
+
+{%block content%}
+<div style='margin:30px auto; width:50%'>
+    <form method='post' action="{%url 'update_post' post.id %}" enctype="multipart/form-data">
+        {%csrf_token %}
+
+        <div class="mb-3">
+          <label for="exampleInputtext" class="form-label h5"><em class="add_color">Tittle:</em></label>
+          <input type="text" class="form-control" id="exampleInputtext" name='title' value='{{post.title}}'>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label h5"><em class="add_color">Content:</em></label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name='content' >{{post.content}}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label h5"><em class="add_color">Add more images:</em></label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple name='images'>
+          </div><hr>
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label h5"><em class="add_color">Select photos to be deleted:</em></label>
+
+            {%get_images post as postgallerys%}
+
+            <div class="d-flex flex-wrap gap-3" >
+            {%for item in postgallerys%}
+                <img src="{{item.image.url}}" alt="photo" style='width:25%;' name='post_image' />
+                <input type='hidden' value='no_data' name='deleted_imgs' data='{{item.id}}'>
+              {%endfor%}
+            </div><hr>
+            <div class="mb-3">
+              <label for="formFileMultiple" class="form-label h5"><em class="add_color">Date Created:</em></label>
+              <input type="text" class="form-control" id="exampleInputtext" name='title' value='{{post.created_at}}' disabled>
+            </div>
+      
+       
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-success">Update</button>
+      </form>
+</div>
+{% endblock %}
+
+
+{%block extraJs%}
+<script>
+  images= document.getElementsByName('post_image')
+  images.forEach((element) => {
+  element.addEventListener("click", () => {
+    element.classList.toggle('deleted')
+    let hiddenInput= element.nextElementSibling
+    if (element.classList.contains('deleted')){
+      hiddenInput.value=hiddenInput.getAttribute('data')
+    }
+    else{
+      hiddenInput.value='no_data'
+    }
+ });
+})
+
+  
+</script>
+ {%endblock%}

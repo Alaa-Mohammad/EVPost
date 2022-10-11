@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load poll_extras %}
+
+{% block content %}
+<br><hr>
+  <ul class="pagination">
+    {% if posts.has_previous %}
+    <li class="page-item "><a class="page-link text-success" href="?page={{posts.previous_page_number}}">Previous</a></li>
+    {% else %}
+    <li class="page-item disabled"><a class="page-link text-success" href="#">Previous</a></li>
+    {% endif %}
+
+    {% for i in posts.paginator.page_range %}
+    {% if posts.number == i %}
+      <li class="page-item active"><a class="page-link text-white bg-secondary border border-light" href="#">{{i}}</a></li>
+    {% else %}
+      <li class="page-item"><a class="page-link text-dark" href="?page={{i}}">{{i}}</a></li>
+    {% endif %}
+  {% endfor %}
+
+			{% if posts.has_next %}
+	    	<li class="page-item"><a class="page-link text-success" href="?page={{posts.next_page_number}}">Next</a></li>
+			{% else %}
+				<li class="page-item disabled"><a class="page-link text-success" href="#">Next</a></li>
+			{% endif %}
+  </ul>
+</nav>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 d-flex mt-3">
+  {%for post in posts%}
+  <div class="card">
+    <a href='{{post.get_absolute_url}}' style='text-decoration: none !important;'>
+
+    
+    {%get_images post as postgallerys%}
+    
+    <div id="carouselExampleInterval{{forloop.counter}}" class="carousel slide" data-bs-ride="carousel" >
+      <div class="carousel-inner">
+        {%for item in postgallerys%}
+        <div class="carousel-item {%if forloop.counter == 1 %}active{%endif%}" data-bs-interval="100000">
+          <img src="{{item.image.url}}" class="d-block w-100 " alt="..." style="width:300px;height:280px">
+        </div>
+        {%endfor%}
+      
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval{{forloop.counter}}" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval{{forloop.counter}}" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </a>
+  
+      <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">{{post.content}}</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">{{post.created_at}}</small><br>
+        <small class="text-muted">{{post.user.username}}</small>
+      </div>
+  </div>
+    
+  {%endfor%}
+</div>
+<br>
+
+{% endblock content %}
+
+

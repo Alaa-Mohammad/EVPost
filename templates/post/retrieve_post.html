@@ -1,0 +1,69 @@
+{%extends 'base.html'%}
+{%load static%}
+{% load poll_extras %}
+
+
+{%block extraCSS%}
+<style>
+  .custom_font{
+    font-size:25px; 
+    font-weight:500;
+    color:green
+}
+
+.custom_child{
+  padding-left:10px;
+  font-size:20px; 
+
+}
+.add_color{
+  color:green
+}
+</style>
+{%endblock%}
+
+
+{%block content%}
+
+
+<div style='margin:30px auto; width:75%' >
+
+<div class="card text-center">
+  {%if request.user != post.user%}
+  <div class="card-header "><em class="add_color">publisher:</em>  {{post.user.username}}</div>
+
+  {%endif%}
+  <div class="card-header "><em class="add_color">Date created:</em>  {{post.created_at}}</div>
+  <div class="card-body">
+    <h5 class="card-title "><em class="add_color">Title:</em><br> {{post.title}} </h5>
+    <hr>
+    <p class="card-text "><strong class="add_color">Content:</strong> <br>{{post.content}}</p>
+  </div>
+  <hr>
+  <h5 class="card-text "><em class="add_color">Images:</em> </h5><br>
+
+  {%get_images post as postgallerys%}
+
+  <div class="d-flex flex-wrap gap-3" >
+  {%for item in postgallerys%}
+      <img src="{{item.image.url}}" alt="photo" style='width:25%;' name='post_image' />
+    {%endfor%}
+  </div>
+<br>
+  <div class="card-footer text-muted"> <br>
+
+    {%if request.user == post.user%}
+    <a href="{%url 'update_post' post.id %}">
+    <button class="btn btn-secondary btn-lg">Edit</button>
+  </a>&nbsp
+    <a href="{%url 'delete_post' post.id %}">
+    <button  class="btn btn-danger btn-lg">Delete</button>
+  </a>
+    {%endif%}
+
+  </div>
+ </div>
+</div>
+{% endblock %}
+
+

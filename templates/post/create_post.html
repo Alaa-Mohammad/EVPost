@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div style='margin:30px auto; width:50%; min-height:70vh;'>
+    <form method='post' action="{%url 'create_post'%}" enctype="multipart/form-data">
+        {%csrf_token %}
+
+        <div class="mb-3">
+          <label for="exampleInputtext" class="form-label">Tittle</label>
+          <input type="text" class="form-control" id="exampleInputtext" name='title' required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name='content' required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+            <input class="form-control" type="file"  id="formFileMultiple" multiple name='images'>
+          </div>
+        <button type="submit" class="btn btn-success">Create</button>
+      </form>
+</div>
+{% endblock %}
