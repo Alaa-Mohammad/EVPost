@@ -12,70 +12,69 @@
     {% endif %}
 
     {% for i in posts.paginator.page_range %}
-    {% if posts.number == i %}
-      <li class="page-item active"><a class="page-link text-white bg-secondary border border-light" href="#">{{i}}</a></li>
-    {% else %}
-      <li class="page-item"><a class="page-link text-dark" href="?page={{i}}">{{i}}</a></li>
-    {% endif %}
-  {% endfor %}
+        {% if posts.number == i %}
+          <li class="page-item active"><a class="page-link text-white bg-secondary border border-light" href="#">{{i}}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link text-dark" href="?page={{i}}">{{i}}</a></li>
+        {% endif %}
+     {% endfor %}
 
-			{% if posts.has_next %}
-	    	<li class="page-item"><a class="page-link text-success" href="?page={{posts.next_page_number}}">Next</a></li>
-			{% else %}
-				<li class="page-item disabled"><a class="page-link text-success" href="#">Next</a></li>
-			{% endif %}
+	{% if posts.has_next %}
+	<li class="page-item"><a class="page-link text-success" href="?page={{posts.next_page_number}}">Next</a></li>
+	{% else %}
+		<li class="page-item disabled"><a class="page-link text-success" href="#">Next</a></li>
+	{% endif %}
   </ul>
 </nav>
 
 <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+
   {%for post in posts%}
-  <div class="card">
-    <a href='{{post.get_absolute_url}}' style='text-decoration: none !important;color:black;'>
+  <div class="col">
+    <div class="card h-100">
+      <a href='{{post.get_absolute_url}}' style='text-decoration: none !important;color:black; display:contents;'>
+      
+       {%get_images post as postgallerys%}
 
+      <div id="carouselExampleInterval{{forloop.counter}}" class="carousel slide" data-bs-ride="carousel" >
+        <div class="carousel-inner">
+          {%for item in postgallerys%}
+          <div class="carousel-item {%if forloop.counter == 1 %}active{%endif%}" data-bs-interval="100000">
+            <img src="{{item.image.url}}" class="d-block w-100 " alt="..." style="width:300px;height:280px">
+          </div>
+          {%endfor%}
 
-    {%get_images post as postgallerys%}
-
-    <div id="carouselExampleInterval{{forloop.counter}}" class="carousel slide" data-bs-ride="carousel" >
-      <div class="carousel-inner">
-        {%for item in postgallerys%}
-        <div class="carousel-item {%if forloop.counter == 1 %}active{%endif%}" data-bs-interval="100000">
-          <img src="{{item.image.url}}" class="d-block w-100 " alt="..." style="width:300px;height:280px">
         </div>
-        {%endfor%}
-
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval{{forloop.counter}}" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval{{forloop.counter}}" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval{{forloop.counter}}" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval{{forloop.counter}}" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-
 
       <div class="card-body">
         <h5 class="card-title"><em>{{post.title}}</em></h5>
         <p class="card-text">
           {%if postgallerys|length < 1%}
-          {{post.content|truncatewords:130}}
+          {{post.content|truncatechars:470}}
+
           {%else%}
-          {{post.content|truncatewords:30}}
+          {{post.content|truncatechars:112}}
           {%endif%}
           </p>
       </div>
-    </a>
       <div class="card-footer">
         <small class="text-muted"><em>publisher: </em>{{post.user.username}}</small><br>
         <small class="text-muted"><em>Date created:: </em>{{post.created_at}}</small>
       </div>
+    </a>
   </div>
-
+</div>
   {%endfor%}
 </div>
 <br>
 
 {% endblock content %}
-
-
