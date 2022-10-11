@@ -63,10 +63,10 @@
         </p>
       </div>
     </a>
-      <div class="card-footer " >
-        <small class="text-muted">{{post.created_at}}</small>
-        <small class="text-muted"><em>publisher: </em>{{post.user.username}}</small><br>
-      </div>
+    <div class="card-footer">
+      <small class="text-muted"><em>publisher: </em>{{post.user.username}}</small><br>
+      <small class="text-muted"><em>Date created:: </em>{{post.created_at}}</small>
+    </div>
   </div>
     
   {%endfor%}
