@@ -10,11 +10,9 @@
     font-weight:500;
     color:green
 }
-
 .custom_child{
   padding-left:10px;
   font-size:20px; 
-
 }
 .add_color{
   color:green
@@ -25,14 +23,12 @@
 
 {%block content%}
 
-
 <div style='margin:30px auto; width:75%' >
-
 <div class="card text-center">
   {%if request.user != post.user%}
   <div class="card-header "><em class="add_color">publisher:</em>  {{post.user.username}}</div>
-
   {%endif%}
+
   <div class="card-header "><em class="add_color">Date created:</em>  {{post.created_at}}</div>
   <div class="card-body">
     <h5 class="card-title "><em class="add_color">Title:</em><br> {{post.title}} </h5>
@@ -43,7 +39,6 @@
   <h5 class="card-text "><em class="add_color">Images:</em> </h5><br>
 
   {%get_images post as postgallerys%}
-
   <div class="d-flex flex-wrap gap-3" >
   {%for item in postgallerys%}
       <img src="{{item.image.url}}" alt="photo" style='width:25%;' name='post_image' />

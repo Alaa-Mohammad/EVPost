@@ -2,7 +2,6 @@
 {%load static%}
 {% load poll_extras %}
 
-
 {%block extraCSS%}
 <style>
   .deleted{
@@ -46,8 +45,6 @@
               <label for="formFileMultiple" class="form-label h5"><em class="add_color">Date Created:</em></label>
               <input type="text" class="form-control" id="exampleInputtext" name='title' value='{{post.created_at}}' disabled>
             </div>
-      
-       
         </div>
         <hr>
         <button type="submit" class="btn btn-success">Update</button>
@@ -71,7 +68,6 @@
     }
  });
 })
-
-  
 </script>
+
  {%endblock%}

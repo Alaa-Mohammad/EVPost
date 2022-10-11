@@ -38,13 +38,10 @@ def login(request):
             return redirect(reverse('all_posts'))
         else:
             return render(request, 'accounts/login.html',{'error':'Invalid username or password'})
-            
-            
+
     return render(request, 'accounts/login.html')
     
         
-
-
 @login_required(login_url = 'login')
 def logout(request):
     auth.logout(request)

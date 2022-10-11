@@ -4,40 +4,35 @@
 {% block content %}
 
 <section class="section-content padding-y" >
-
-<!-- ============================ COMPONENT REGISTER   ================================= -->
 	<div class="card mx-auto" style="max-width:490px; margin-top:40px;">
       <article class="card-body">
-		<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
-		<form action="{% url 'register' %}" method="POST">
-      {% csrf_token %}
+			<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+			<form action="{% url 'register' %}" method="POST">
+			{% csrf_token %}
 
-				<div class="mb-3">
-					  <label class='form-label'>User Names</label>
-					  {{form.username}}
-			
-				</div> <!-- form-row.// -->
-				<div class="mb-3">
-						<label lass='form-label'>Create password</label>
-					    {{ form.password }}
-                </div>
-        		<div class="mb-3">
-						<label lass='form-label'>Repeat password</label>
-                        {{form.confirm_password}}
-				</div>
-			    <div  class="mb-3">
-			        <button type="submit" class="btn btn-success btn-block"> Register  </button>
-			    </div> <!-- form-group// -->
-      {{ form.email.errors }}
-      {{ form.non_field_errors }}
+			<div class="mb-3">
+				<label class='form-label'>User Names</label>
+				{{form.username}}
+			</div> 
+			<div class="mb-3">
+				<label lass='form-label'>Create password</label>
+				{{ form.password }}
+			</div>
+			<div class="mb-3">
+				<label lass='form-label'>Repeat password</label>
+				{{form.confirm_password}}
+			</div>
+			<div class="mb-3">
+				<button type="submit" class="btn btn-success btn-block"> Register  </button>
+			</div> 
+
+			{{ form.email.errors }}
+			{{ form.non_field_errors }}
 			</form>
-		</article><!-- card-body.// -->
-    </div> <!-- card .// -->
-    <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
-    <br><br>
-<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
-
-
+		</article>
+	</div> 
+	<p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
+	<br><br>
 </section>
 
 {% endblock %}

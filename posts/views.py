@@ -72,7 +72,6 @@ def update_post(request,post_pk):
                 if image_id != 'no_data':
                    PostGallery.objects.get(id=int(image_id),post=post).delete()
                 
-                
         return redirect(reverse('retrieve_post',args=(post.id,)))
     else:
         post= get_object_or_404(Post, pk=post_pk, is_available=True)
