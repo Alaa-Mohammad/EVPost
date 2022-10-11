@@ -1,7 +1,7 @@
 # EVPost
 ## _Online sharing posts Platform_
 
-Click on this image to go to the site, and enjoy your experience with others
+Click on this link to go to the site, and enjoy your experience with others
 [![N|Solid](https://signum.ai/wp-content/uploads/2021/05/twitterblog-49.png)](https://evposts.pythonanywhere.com)
 [Lets go to EVPost Site](https://evposts.pythonanywhere.com)
 
