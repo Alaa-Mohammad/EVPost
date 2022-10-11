@@ -15,7 +15,7 @@ Click on this image to go to the site, and enjoy your experience with others
 - It is not possible to post within the site without logging in
 - The process of deleting the post is not actually done, but rather it is given a     deactivation signal, and therefore it will not be permanently deleted from the       database, but it will not be displayed to the user or to other users.
 
-Tools:
+## Tools:
 ```sh
 Python , Django, HTML, CSs, JS, Bootstrap
 ```
