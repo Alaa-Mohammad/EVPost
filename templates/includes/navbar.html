@@ -1,9 +1,9 @@
 {% load static %}
 {% load poll_extras %}
 
-<nav class="navbar navbar-expand-md navbar-dark  bg-dark " >
+<nav class="navbar navbar-expand-md navbar-dark" style="margin-top:2px;background-color:rgb(177, 174, 174);" >
     <div class="container-fluid">
-      <a class="navbar-brand" href="/" style='font-size:23px;font-family: "Times New Roman", Times, serif'>EVPost</a>
+      <a class="navbar-brand" href="/" style='color:black;font-size:23px;font-family: "Times New Roman", Times, serif'><span style="color:green">EV</span>Post</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -16,24 +16,24 @@
           {%if  request.user.is_authenticated%}
 
           <li class="nav-item">
-            <a class="nav-link" href="{%url 'my_posts' request.user.id%}"
-            {%if request.user.id|to_str in request.path %} style='color:green' {%endif%} >Your Posts</a>
+            <a class="nav-link active" href="{%url 'my_posts' request.user.id%}"
+            {%if request.user.id|to_str in request.path %} style='color:green;' {%endif%} >Your Posts</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{%url 'create_post' %}" 
+            <a class="nav-link active" href="{%url 'create_post' %}" 
            {%if 'create_post' in request.path %} style='color:green' {%endif%} >create post</a>
           </li>
           {%endif%}
         </ul>
         <div class="d-flex">
           {%if  request.user.is_authenticated%}
-          <h6 style='margin-right:10px; margin-top:10px ;color:white'><em>welcome {{request.user.username}}</em></h6>
-          <a href={%url 'logout' %}><button class="btn btn-outline-success" >Logout</button></a>
+          <h6 style='margin-right:10px; margin-top:10px ;color:white'><em style="color:rgb(85, 84, 84);font-weight:550">welcome {{request.user.username}}</em></h6>
+          <a href={%url 'logout' %}><button class="btn btn-outline-success" style="font-weight:600" >Logout</button></a>
 
           {%else%}
-          <a href={%url 'login' %}> <button class="btn btn-outline-success"  style='margin-right:10px;' >Login</button></a>
-            <a href={%url 'register' %}><button class="btn btn-outline-success" >Register</button></a>
+          <a href={%url 'login' %}> <button class="btn btn-outline-success"  style='margin-right:10px;font-weight:600' >Login</button></a>
+            <a href={%url 'register' %}><button class="btn btn-outline-success" style="font-weight:600" >Register</button></a>
 
           {%endif%}
         </div>
