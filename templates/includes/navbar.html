@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark" style="margin-top:2px;background-color:rgb(177, 174, 174);" >
     <div class="container-fluid">
-      <a class="navbar-brand" href="/" style='color:black;font-size:23px;font-family: "Times New Roman", Times, serif'><span style="color:green">EV</span>Post</a>
+      <a class="navbar-brand" href="/" style='color:black;font-size:23px;font-family: "Times New Roman", Times, serif'><span style="color:green">EV</span>Article</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -11,18 +11,18 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item ">
             <a class="nav-link custom_link" aria-current="page" href="{%url 'all_posts' %}" 
-            {%if '/' == request.path%} style='color:green;font-weight:500'{%else%}style='color:white;font-weight:500' {%endif%}>All posts</a>
+            {%if '/' == request.path%} style='color:green;font-weight:500'{%else%}style='color:white;font-weight:500' {%endif%}>All Articles</a>
           </li>
           {%if  request.user.is_authenticated%}
 
           <li class="nav-item ">
             <a class="nav-link custom_link" href="{%url 'my_posts' request.user.id%}"
-            {%if request.user.id|to_str in request.path %} style='color:green;font-weight:500'{%else%}style='color:white;font-weight:500' {%endif%}>Your Posts</a>
+            {%if request.user.id|to_str in request.path %} style='color:green;font-weight:500'{%else%}style='color:white;font-weight:500' {%endif%}>Your Articles</a>
           </li>
 
           <li class="nav-item ">
             <a class="nav-link custom_link" href="{%url 'create_post' %}" 
-           {%if 'create_post' in request.path %} style='color:green;font-weight:500'{%else%}style='color:white;font-weight:500' {%endif%} >create post</a>
+           {%if 'create_post' in request.path %} style='color:green;font-weight:500'{%else%}style='color:white;font-weight:500' {%endif%} >create Article</a>
           </li>
           {%endif%}
         </ul>
