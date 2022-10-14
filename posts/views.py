@@ -85,4 +85,5 @@ def delete_post(request, post_pk):
     post.is_available=False
     post.save()
     return redirect(reverse('my_posts',args=(request.user.id,)))
+
     
